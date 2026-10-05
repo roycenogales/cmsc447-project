@@ -1,22 +1,21 @@
 # GitHub Practices to Follow  
 
 ## Before Working  
-Do the command  
+Do the following command to make sure your directory is up to date.  
 ```
 git pull
 ```
-to make sure that your machine is up to date.
 
 ## Push Steps
-```bash
+This stages everything to be commited.  
+```
 git add -A
 ```
-This stages everything to be commited.
-```bash
+This commits it with a message.  
+```
 git commit -m "something that describes what changed"
 ```
-This commits it with a message.
-```bash
-git push origin main
+This pushes everything to the GitHub.  
 ```
-Pushes everything to the GitHub
+git push origin main
+```  
