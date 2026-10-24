@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     postgres_db: str
     postgres_host: str = "localhost"
     postgres_port: int = 5432
+    cors_origins: list[str] = ["http://localhost:5173"]
 
     @property
     def database_url(self) -> str:
