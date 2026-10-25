@@ -12,8 +12,9 @@ class WeeklyMetric(Base):
     __tablename__ = "weekly_metrics"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    office_id: Mapped[int] = mapped_column(ForeignKey("offices.id"))
+    # Nullable until uploads are tied to an office (the demo CSV has no office column).
+    office_id: Mapped[int | None] = mapped_column(ForeignKey("offices.id"))
     week_start: Mapped[date] = mapped_column(Date)
-    metric_name: Mapped[str] = mapped_column(String(100))
+    metric: Mapped[str] = mapped_column(String(100))
     demographic_group: Mapped[str] = mapped_column(String(100))
     count: Mapped[int]
