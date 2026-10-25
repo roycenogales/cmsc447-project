@@ -8,3 +8,6 @@ class HealthResponse(BaseModel):
 
 class NotImplementedResponse(BaseModel):
     detail: str
+
+class UploadResponse(BaseModel):
+    detail: str
