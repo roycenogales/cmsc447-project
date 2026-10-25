@@ -1,0 +1,47 @@
+/* Minimal base styles; replace once the team picks a design */
+:root {
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.header h1 {
+  font-size: 1.25rem;
+}
+
+.header nav {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+}
+
+.header nav a.active {
+  font-weight: bold;
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+.health-badge {
+  font-size: 0.875rem;
+}
+
+.health-badge.connected {
+  color: green;
+}
+
+.health-badge.unreachable {
+  color: crimson;
+}
