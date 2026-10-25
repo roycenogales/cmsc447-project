@@ -12,22 +12,41 @@ export class ApiError extends Error {
   }
 }
 
+/** True when a request was cancelled via its AbortSignal, so callers can ignore it. */
+export function isAbortError(error: unknown): boolean {
+  return error instanceof DOMException && error.name === 'AbortError'
+}
+
+// FastAPI sends `detail` as a string for HTTPException, but as a list of
+// { loc, msg, type } objects for 422 validation errors.
+function errorMessage(body: unknown, fallback: string): string {
+  const detail = (body as { detail?: unknown } | null)?.detail
+  if (typeof detail === 'string') return detail
+  if (Array.isArray(detail)) {
+    const messages = detail
+      .map((item) => (item as { msg?: unknown })?.msg)
+      .filter((msg): msg is string => typeof msg === 'string')
+    if (messages.length > 0) return messages.join('; ')
+  }
+  return fallback
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${API_URL}${path}`, init)
   const body = await response.json().catch(() => null)
   if (!response.ok) {
-    throw new ApiError(response.status, body?.detail ?? response.statusText)
+    throw new ApiError(response.status, errorMessage(body, response.statusText))
   }
   return body as T
 }
 
-export function getHealth(): Promise<HealthResponse> {
-  return request<HealthResponse>('/health')
+export function getHealth(signal?: AbortSignal): Promise<HealthResponse> {
+  return request<HealthResponse>('/health', { signal })
 }
 
 // TODO: replace NotImplementedResponse with the real metrics shape once the endpoint exists
-export function getMetrics(): Promise<NotImplementedResponse> {
-  return request<NotImplementedResponse>('/metrics')
+export function getMetrics(signal?: AbortSignal): Promise<NotImplementedResponse> {
+  return request<NotImplementedResponse>('/metrics', { signal })
 }
 
 // TODO: replace NotImplementedResponse with the real upload result shape once the endpoint exists

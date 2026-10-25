@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react'
-import { getMetrics } from '../api/client'
+import { getMetrics, isAbortError } from '../api/client'
 
 /** Placeholder for the weekly metrics visualization. */
 export default function DashboardPage() {
   const [message, setMessage] = useState('Loading metrics...')
 
   useEffect(() => {
-    getMetrics()
+    const controller = new AbortController()
+    getMetrics(controller.signal)
       .then((data) => setMessage(data.detail))
-      .catch((error: Error) => setMessage(error.message))
+      .catch((error: Error) => {
+        if (!isAbortError(error)) setMessage(error.message)
+      })
+    return () => controller.abort()
   }, [])
 
   return (
