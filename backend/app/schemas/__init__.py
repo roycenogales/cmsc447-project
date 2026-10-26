@@ -1,3 +1,4 @@
-from app.schemas.common import HealthResponse, NotImplementedResponse
+from app.schemas.common import ErrorResponse, HealthResponse, NotImplementedResponse
+from app.schemas.metrics import WeeklyMetricOut
 
-__all__ = ["HealthResponse", "NotImplementedResponse"]
+__all__ = ["ErrorResponse", "HealthResponse", "NotImplementedResponse", "WeeklyMetricOut"]
