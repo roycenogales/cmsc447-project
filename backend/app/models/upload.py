@@ -12,7 +12,8 @@ class Upload(Base):
     __tablename__ = "uploads"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    office_id: Mapped[int] = mapped_column(ForeignKey("offices.id"))
+    # Nullable until tied to an office
+    office_id: Mapped[int | None] = mapped_column(ForeignKey("offices.id"))
     filename: Mapped[str] = mapped_column(String(255))
     status: Mapped[str] = mapped_column(String(50), default="pending")
     uploaded_at: Mapped[datetime] = mapped_column(
