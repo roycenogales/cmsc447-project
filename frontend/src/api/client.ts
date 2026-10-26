@@ -1,4 +1,9 @@
-import type { HealthResponse, NotImplementedResponse } from './types'
+
+import type {
+  HealthResponse,
+  NotImplementedResponse,
+  MetricsResponse
+} from './types'
 
 const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8000'
 
@@ -44,9 +49,9 @@ export function getHealth(signal?: AbortSignal): Promise<HealthResponse> {
   return request<HealthResponse>('/health', { signal })
 }
 
-// TODO: replace NotImplementedResponse with the real metrics shape once the endpoint exists
-export function getMetrics(signal?: AbortSignal): Promise<NotImplementedResponse> {
-  return request<NotImplementedResponse>('/metrics', { signal })
+/** Retrieve weekly metrics for the dashboard bar chart. */
+export function getMetrics(signal?: AbortSignal): Promise<MetricsResponse> {
+  return request<MetricsResponse>('/metrics', { signal })
 }
 
 // TODO: replace NotImplementedResponse with the real upload result shape once the endpoint exists
