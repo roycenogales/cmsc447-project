@@ -1,9 +1,15 @@
-from datetime import datetime
 from pydantic import BaseModel
 
-class UploadCreate(BaseModel):
-    id: int
-    office_id: int
-    filename: str
-    status: str
-    uploaded_at: datetime
+
+class UploadResponse(BaseModel):
+    rows_inserted: int
+
+
+class CsvErrorOut(BaseModel):
+    msg: str
+    row: int | None = None
+    column: str | None = None
+
+
+class UploadErrorResponse(BaseModel):
+    detail: list[CsvErrorOut]

@@ -55,12 +55,12 @@ test('shows backend unreachable when health is 200 but database is not connected
 test('dashboard shows health and metrics from separate requests', async () => {
   mockFetch({
     '/health': { body: { status: 'ok', database: 'connected' } },
-    '/metrics': { body: { detail: 'Metrics not implemented yet' }, status: 501 },
+    '/metrics': { body: { detail: 'No metrics found' }, status: 404 },
   })
   renderAt('/')
 
   expect(await screen.findByText('Backend: connected')).toBeInTheDocument()
-  expect(await screen.findByText('Metrics not implemented yet')).toBeInTheDocument()
+  expect(await screen.findByText(/No metrics available yet/)).toBeInTheDocument()
 })
 
 test('upload shows readable messages for FastAPI validation errors', async () => {
