@@ -9,20 +9,16 @@ export interface HealthResponse {
   database: string
 }
 
-// Existing response for unfinished backend endpoints
-export interface NotImplementedResponse {
-  detail: string
+// Response from POST /uploads. Mirrors backend/app/schemas/upload.py (UploadResponse)
+export interface UploadResult {
+  rows_inserted: number
 }
 
-// One week of service metrics
+// One row from GET /metrics. Mirrors backend/app/schemas/metrics.py (WeeklyMetricOut)
 export interface WeeklyMetric {
-  service_name: string
+  id: number
   week_start: string
-  visit_count: number
-  unique_count: number
-}
-
-// Expected response from GET /metrics
-export interface MetricsResponse {
-  metrics: WeeklyMetric[]
+  demographic_group: string
+  metric: string
+  count: number
 }

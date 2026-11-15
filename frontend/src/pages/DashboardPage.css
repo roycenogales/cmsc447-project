@@ -19,6 +19,8 @@
   border: 1px solid #ddd;
   border-radius: 10px;
   background: #fff;
+  /* The page follows the system theme (white text in dark mode), but this card is always white */
+  color: #222;
 }
 
 .metrics-controls {
@@ -80,6 +82,48 @@
 .metric-value {
   font-weight: 600;
   text-align: right;
+}
+
+.metric-table-wrap {
+  margin-top: 32px;
+  overflow-x: auto;
+}
+
+.metric-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-table caption {
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.metric-table th,
+.metric-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.metric-table th:first-child,
+.metric-table td:first-child {
+  text-align: left;
+}
+
+.metric-table thead th {
+  border-bottom: 2px solid #ccc;
+}
+
+.metric-table .selected {
+  background: #fff4d6;
+}
+
+.metric-table .total {
+  font-weight: 600;
 }
 
 @media (max-width: 480px) {

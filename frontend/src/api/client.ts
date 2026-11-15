@@ -1,8 +1,8 @@
 
 import type {
   HealthResponse,
-  NotImplementedResponse,
-  MetricsResponse
+  UploadResult,
+  WeeklyMetric
 } from './types'
 
 const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8000'
@@ -49,14 +49,14 @@ export function getHealth(signal?: AbortSignal): Promise<HealthResponse> {
   return request<HealthResponse>('/health', { signal })
 }
 
-/** Retrieve weekly metrics for the dashboard bar chart. */
-export function getMetrics(signal?: AbortSignal): Promise<MetricsResponse> {
-  return request<MetricsResponse>('/metrics', { signal })
+/** Retrieve weekly metrics for the dashboard bar chart. Newest week first; 404 when there's no data. */
+export function getMetrics(signal?: AbortSignal): Promise<WeeklyMetric[]> {
+  return request<WeeklyMetric[]>('/metrics', { signal })
 }
 
-// TODO: replace NotImplementedResponse with the real upload result shape once the endpoint exists
-export function uploadCsv(file: File): Promise<NotImplementedResponse> {
+/** Upload a CSV of weekly metrics. A 400 lists every problem found; nothing is inserted. */
+export function uploadCsv(file: File): Promise<UploadResult> {
   const form = new FormData()
   form.append('file', file)
-  return request<NotImplementedResponse>('/uploads', { method: 'POST', body: form })
+  return request<UploadResult>('/uploads', { method: 'POST', body: form })
 }

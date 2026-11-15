@@ -1,0 +1,7 @@
+week_start,demographic_group,metric,count
+2026-10-12,undergraduate,visits,80
+Sept 21,graduate,visits,26
+2026-10-12,transfer,visits,-4
+2026-10-12,graduate,retention,12.5
+2026-10-12,transfer,,10
+2026-10-12,undergraduate,retention,55

@@ -25,7 +25,8 @@ export default function UploadPage() {
     try {
       const result = await uploadCsv(file)
 
-      setMessage(result.detail || 'CSV uploaded successfully.')
+      const rows = result.rows_inserted
+      setMessage(`Inserted ${rows} ${rows === 1 ? 'row' : 'rows'}.`)
       setFile(null)
 
       // Clear the file input after successful upload
@@ -41,13 +42,6 @@ export default function UploadPage() {
       ) {
         setMessage(
           'Upload endpoint not found (404). Check that POST /uploads is registered on the backend.'
-        )
-      } else if (
-        caught instanceof ApiError &&
-        caught.status === 501
-      ) {
-        setMessage(
-          'CSV uploads are not implemented on the backend yet (501).'
         )
       } else {
         setMessage(

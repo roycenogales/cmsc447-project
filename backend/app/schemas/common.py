@@ -9,5 +9,7 @@ class HealthResponse(BaseModel):
 class NotImplementedResponse(BaseModel):
     detail: str
 
-class UploadResponse(BaseModel):
+
+class ErrorResponse(BaseModel):
     detail: str
+
