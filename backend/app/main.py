@@ -11,17 +11,6 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Retriever Essentials Dashboard API")
 
-'''
-# may or may not need this, unsure rn
-
-@app.get("/")
-async def root():
-    return {"message": "Welcome to FastAPI Authentication Demo"}
-
-@app.get("/protected")
-async def protected_route(current_user: str = Depends(authenticate_user)):
-    return {"message": f"Hello {current_user}, this is a protected route!"}
-'''
 # Registered before CORSMiddleware so CORS wraps it. Otherwise unhandled errors reach
 # Starlette's outer error handler and the 500 goes out without CORS headers, which the
 # browser reports as an opaque "Failed to fetch".
