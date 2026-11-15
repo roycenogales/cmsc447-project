@@ -1,16 +1,15 @@
 import logging
 
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Depends, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.config import settings
-from app.routers import health, metrics, uploads
+from app.routers import health, metrics, uploads, auth
 
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Retriever Essentials Dashboard API")
-
 
 # Registered before CORSMiddleware so CORS wraps it. Otherwise unhandled errors reach
 # Starlette's outer error handler and the 500 goes out without CORS headers, which the
@@ -35,3 +34,5 @@ app.add_middleware(
 app.include_router(health.router)
 app.include_router(uploads.router)
 app.include_router(metrics.router)
+
+app.include_router(auth.router)
