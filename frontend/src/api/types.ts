@@ -9,6 +9,11 @@ export interface HealthResponse {
   database: string
 }
 
+// Response from GET /login/login. Mirrors backend/app/routers/auth.py
+export interface LoginResponse {
+  message: string
+}
+
 // Response from POST /uploads. Mirrors backend/app/schemas/upload.py (UploadResponse)
 export interface UploadResult {
   rows_inserted: number

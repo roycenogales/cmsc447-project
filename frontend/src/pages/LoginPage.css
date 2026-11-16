@@ -1,0 +1,48 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  padding: 64px 16px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  /* Wide enough for the logo and title on one line */
+  max-width: 460px;
+}
+
+.login-form h1 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.login-form h2 {
+  margin: 0;
+}
+
+.login-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.login-form input {
+  padding: 8px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  font: inherit;
+}
+
+.login-form button {
+  padding: 8px;
+  font: inherit;
+}
+
+.login-error {
+  color: #a11d1d;
+  font-weight: 500;
+  margin: 0;
+}

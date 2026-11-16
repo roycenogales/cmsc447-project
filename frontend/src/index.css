@@ -20,6 +20,21 @@ body {
   font-size: 1.25rem;
 }
 
+/* Logo + title, used in the header and on the login page */
+.brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* UMBC brand rules want clear space of at least 1/10 the logo height */
+  gap: 0.75rem;
+}
+
+.umbc-logo {
+  display: block;
+  height: 32px;
+  width: auto;
+}
+
 .header nav {
   display: flex;
   gap: 1rem;
