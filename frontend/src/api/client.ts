@@ -1,6 +1,7 @@
 
 import type {
   HealthResponse,
+  LoginResponse,
   UploadResult,
   WeeklyMetric
 } from './types'
@@ -47,6 +48,16 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export function getHealth(signal?: AbortSignal): Promise<HealthResponse> {
   return request<HealthResponse>('/health', { signal })
+}
+
+/** Check a username and password with HTTP Basic auth. A 401 means the credentials are wrong. */
+export function login(username: string, password: string): Promise<LoginResponse> {
+  // btoa only accepts Latin-1, so encode to UTF-8 bytes first instead of letting it throw
+  const bytes = new TextEncoder().encode(`${username}:${password}`)
+  const token = btoa(String.fromCharCode(...bytes))
+  return request<LoginResponse>('/login/login', {
+    headers: { Authorization: `Basic ${token}` },
+  })
 }
 
 /** Retrieve weekly metrics for the dashboard bar chart. Newest week first; 404 when there's no data. */
